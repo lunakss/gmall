@@ -1,23 +1,17 @@
 package com.atguigu.gmall.pms.controller;
 
-import java.util.List;
-
+import com.atguigu.gmall.common.bean.PageParamVo;
+import com.atguigu.gmall.common.bean.PageResultVo;
+import com.atguigu.gmall.common.bean.ResponseVo;
+import com.atguigu.gmall.pms.entity.AttrEntity;
+import com.atguigu.gmall.pms.service.AttrService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gmall.pms.entity.AttrEntity;
-import com.atguigu.gmall.pms.service.AttrService;
-import com.atguigu.gmall.common.bean.PageResultVo;
-import com.atguigu.gmall.common.bean.ResponseVo;
-import com.atguigu.gmall.common.bean.PageParamVo;
+import java.util.List;
 
 /**
  * 商品属性
@@ -33,6 +27,26 @@ public class AttrController {
 
     @Autowired
     private AttrService attrService;
+
+    /**
+     * 查询特定属性组所有属性
+     */
+    @ApiOperation("根据属性组id查询属性")
+    @GetMapping("group/{groupId}")
+    public ResponseVo<List<AttrEntity>> queryAttrByGid(@PathVariable Long groupId){
+        List<AttrEntity> attrEntities = attrService.list(new QueryWrapper<AttrEntity>().eq("group_id", groupId));
+        return ResponseVo.ok(attrEntities);
+    }
+
+    /**
+     *查询sku
+     */
+    @GetMapping("/category/{cid}")
+    @ApiOperation("分类查询")
+    public ResponseVo<List<AttrEntity>> queryAttrsByCid(@PathVariable Long cid,@RequestParam(value = "type",required = false) Integer type,@RequestParam(value = "searchType",required = false) Integer searchType){
+        List<AttrEntity> attrEntities = attrService.queryAttrsByCid(cid,type,searchType);
+        return ResponseVo.ok(attrEntities);
+    }
 
     /**
      * 列表

@@ -9,3 +9,15 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+aliyun:
+  oss:
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    keyId: LTAI4GGiCc36vm5nA7ibUsB6
+    keySecret: dDpqyKOTvs4X2Rq42XDJg4E0oLbLL1
+    #bucket可以在控制台创建，也可以使用java代码创建，注意先测试bucket是否已被占用
+    bucketName: gmall-lunakss
+spring:
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: pms-service-fescar-service-group

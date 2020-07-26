@@ -21,12 +21,14 @@
         <module>gmall-common</module>
         <module>gmall-sms</module>
         <module>gmall-pms</module>
-        <module>gmall-search</module>
         <module>gmall-wms</module>
         <module>gmall-ums</module>
-        <module>gmall-cart-interface</module>
         <module>gmall-oms</module>
         <module>gmall-gateway</module>
+        <module>gmall-sms-interface</module>
+        <module>elasticsearch-demo</module>
+        <module>gmall-pms-interface</module>
+        <module>gmall-wms-interface</module>
     </modules>
 
     <properties>

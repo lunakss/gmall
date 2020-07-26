@@ -1,23 +1,16 @@
 package com.atguigu.gmall.pms.controller;
 
-import java.util.List;
-
+import com.atguigu.gmall.common.bean.PageParamVo;
+import com.atguigu.gmall.common.bean.PageResultVo;
+import com.atguigu.gmall.common.bean.ResponseVo;
+import com.atguigu.gmall.pms.entity.CategoryEntity;
+import com.atguigu.gmall.pms.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gmall.pms.entity.CategoryEntity;
-import com.atguigu.gmall.pms.service.CategoryService;
-import com.atguigu.gmall.common.bean.PageResultVo;
-import com.atguigu.gmall.common.bean.ResponseVo;
-import com.atguigu.gmall.common.bean.PageParamVo;
+import java.util.List;
 
 /**
  * 商品三级分类
@@ -33,6 +26,18 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+
+
+    /**
+     * 三级分类展示
+     */
+
+    @ApiOperation("根据父id查询分类")
+    @GetMapping("parent/{parentId}")
+    public ResponseVo<List<CategoryEntity>> queryCatrgory(@PathVariable Long parentId){
+        List<CategoryEntity> categoryEntityList = categoryService.queryCategory(parentId);
+        return ResponseVo.ok(categoryEntityList);
+    }
 
     /**
      * 列表
